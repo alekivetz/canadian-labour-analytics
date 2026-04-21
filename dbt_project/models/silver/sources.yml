@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: CANADIAN_LABOUR
+    schema: BRONZE
+    tables:
+      - name: LFS_RAW
