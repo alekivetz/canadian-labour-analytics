@@ -35,14 +35,14 @@ A full-stack data engineering project analyzing the Canadian labour market from 
 
 ## Data Pipeline
 
-### Bronze Layer — `CANADIAN_LABOUR.BRONZE.LFS_RAW`
+### Bronze Layer - `CANADIAN_LABOUR.BRONZE.LFS_RAW`
 Raw microdata loaded directly from Statistics Canada CSV files with no transformations. One row equals one survey respondent. All values are numeric codes as published by Stats Canada.
 
 - 7,377,693 rows
 - 26 columns selected from the original 60
 - Loaded via Python using `write_pandas` from the Snowflake connector
 
-### Silver Layer — `CANADIAN_LABOUR.SILVER.STG_LFS` (dbt view)
+### Silver Layer - `CANADIAN_LABOUR.SILVER.STG_LFS` (dbt view)
 Cleaned and decoded version of the Bronze layer. Numeric codes are decoded into readable labels using CASE statements, and measures are scaled to their correct units.
 
 - Province, gender, age group, marital status, education, immigrant status, labour force status, worker class, industry, and occupation columns decoded
@@ -50,7 +50,7 @@ Cleaned and decoded version of the Bronze layer. Numeric codes are decoded into 
 - Weekly hours divided by 10 (stored in tenths in raw data)
 - Survey weight retained for population-level aggregations
 
-### Gold Layer — `CANADIAN_LABOUR.GOLD.LFS_GOLD` (dbt table)
+### Gold Layer - `CANADIAN_LABOUR.GOLD.LFS_GOLD` (dbt table)
 A single aggregated table grouping all key dimensions with survey-weighted metrics, designed for direct consumption by Power BI.
 
 - Grouped by: survey year, month, province, gender, age group, education, immigrant status, labour force status, worker class, work status, industry, occupation
@@ -63,32 +63,32 @@ A single aggregated table grouping all key dimensions with survey-weighted metri
 
 The Power BI dashboard has six pages, each answering a distinct analytical question. A collapsible filter panel provides cross-dimensional filtering by province, year, month, gender, age group, education, immigration status, industry, and occupation.
 
-### Page 1 — National Overview
+### Page 1 - National Overview
 High-level view of the Canadian labour market from 2020 to 2025. The COVID-19 spike and subsequent recovery are clearly visible in the national unemployment trend.
 
 ![Overview](docs/screenshots/dashboard_overview.png)
 
-### Page 2 — Provincial Analysis
+### Page 2 - Provincial Analysis
 Compares unemployment rates, employment size, and trends across all 10 provinces. Includes a ranked bar chart, employment treemap, trend lines, and a summary table.
 
 ![Provincial](docs/screenshots/dashboard_provincial.png)
 
-### Page 3 — Industry
+### Page 3 - Industry
 Breaks down employment size and unemployment rate across 21 industries. Identifies the most stable and most vulnerable sectors.
 
 ![Industry](docs/screenshots/dashboard_industry.png)
 
-### Page 4 — Occupation
+### Page 4 - Occupation
 Analyzes unemployment rate and employment size across 10 occupation groups. Identifies the most volatile occupation using standard deviation of monthly unemployment rates.
 
 ![Occupation](docs/screenshots/dashboard_occupation.png)
 
-### Page 5 — Demographics
+### Page 5 - Demographics
 Examines how unemployment varies by age group, education level, and immigration status. Reveals which Canadians face the greatest labour market vulnerability.
 
 ![Demographics](docs/screenshots/dashboard_demographics.png)
 
-### Page 6 — Work Status
+### Page 6 - Work Status
 Analyzes full-time vs part-time employment by province, age group, and over time. Includes a bookmark toggle to switch between full-time and part-time trend views.
 
 ![Work Status](docs/screenshots/dashboard_work_status.png)
